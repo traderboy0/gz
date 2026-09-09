@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stock Learners - Learning Community</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #F1F3F8;
-    --card: #FFFFFF;
-    --ink: #12131A;
-    --muted: #6B7080;
-    --accent: #4F5DFF;
-    --accent-soft: #EDEEFF;
-    --line: #ECEDF3;
+    --paper: #ECE6D6;
+    --ink: #1B2A2F;
+    --ink-soft: #4A5A5C;
+    --card: #FBF8F0;
+    --rule: #D8CFB8;
+    --gold: #B4802B;
+    --gold-deep: #8C5F1A;
+    --green: #3E6B4F;
+    --red: #A6432F;
   }
 
   * { box-sizing: border-box; }
@@ -22,8 +24,11 @@
   body {
     margin: 0;
     padding: 24px 16px;
-    font-family: 'Manrope', sans-serif;
-    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px);
+    background-size: 100% 28px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,115 +39,120 @@
     width: 100%;
     max-width: 360px;
     background: var(--card);
-    border-radius: 28px;
-    padding: 28px 24px 24px;
-    box-shadow: 0 1px 2px rgba(18,19,26,0.04), 0 20px 40px -24px rgba(18,19,26,0.18);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 28px 24px 22px;
+    position: relative;
+    box-shadow: 0 1px 0 var(--rule), 0 18px 40px -22px rgba(27, 42, 47, 0.35);
   }
 
-  .top {
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .masthead {
     display: flex;
     align-items: center;
     gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
   }
 
   .profile-img {
-    width: 54px;
-    height: 54px;
-    border-radius: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
     object-fit: cover;
+    border: 1px solid var(--rule);
     flex-shrink: 0;
+    pointer-events: none;
+    user-select: none;
   }
 
-  .top-text h1 {
-    font-size: 18px;
-    font-weight: 800;
+  .masthead-text h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 21px;
     color: var(--ink);
     margin: 0 0 3px;
-    letter-spacing: -0.01em;
+    line-height: 1.1;
   }
 
-  .top-text p {
+  .masthead-text p {
     margin: 0;
-    font-size: 12.5px;
-    color: var(--muted);
-    font-weight: 500;
-  }
-
-  .badge-row {
-    display: flex;
-    gap: 8px;
-    margin: 18px 0 4px;
-  }
-
-  .badge {
-    flex: 1;
-    background: var(--accent-soft);
-    border-radius: 14px;
-    padding: 10px 4px;
-    text-align: center;
-  }
-
-  .badge .num {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--accent);
-    display: block;
-  }
-
-  .badge .lbl {
-    font-size: 9.5px;
-    color: var(--muted);
-    font-weight: 600;
-    text-transform: uppercase;
+    font-size: 11px;
     letter-spacing: 0.03em;
+    color: var(--ink-soft);
+  }
+
+  .ticker {
+    margin: 16px 0 18px;
+    overflow: hidden;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 7px 0;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 22px;
+    width: max-content;
+    animation: scroll 18s linear infinite;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .ticker-track span.up { color: var(--green); }
+  .ticker-track span.down { color: var(--red); }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .chart {
+    margin: 0 0 18px;
   }
 
   .features {
-    margin: 20px 0 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin: 0;
   }
 
   .feature-item {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    border-radius: 16px;
-    background: #FAFAFC;
-    border: 1px solid var(--line);
+    align-items: flex-start;
+    gap: 11px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .feature-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: var(--accent-soft);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .feature-item:last-child { border-bottom: none; }
+
+  .feature-item svg {
     flex-shrink: 0;
-  }
-
-  .feature-icon svg {
-    width: 17px;
-    height: 17px;
-    color: var(--accent);
+    margin-top: 1px;
+    width: 15px;
+    height: 15px;
+    color: var(--gold-deep);
   }
 
   .feature-item span {
     font-size: 13px;
-    font-weight: 600;
     color: var(--ink);
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   .join-text {
-    color: var(--muted);
+    color: var(--ink-soft);
     font-size: 12.5px;
-    font-weight: 500;
-    margin: 22px 0 12px;
+    margin: 20px 0 12px;
     text-align: center;
   }
 
@@ -151,33 +161,34 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: var(--accent);
-    color: #fff;
+    background: var(--ink);
+    color: var(--card);
     text-decoration: none;
-    padding: 15px;
-    border-radius: 16px;
-    font-weight: 700;
+    padding: 13px;
+    border-radius: 4px;
+    font-weight: 600;
     font-size: 14.5px;
+    letter-spacing: 0.01em;
     margin-bottom: 18px;
   }
 
-  .telegram-btn svg { width: 17px; height: 17px; }
+  .telegram-btn svg { width: 16px; height: 16px; }
 
   .hindi-quote {
-    color: var(--muted);
-    font-size: 12.5px;
-    font-weight: 500;
+    color: var(--ink-soft);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13.5px;
     text-align: center;
-    line-height: 1.55;
-    background: var(--accent-soft);
-    border-radius: 14px;
-    padding: 12px 14px;
+    line-height: 1.5;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
     margin-bottom: 14px;
   }
 
   .disclaimer {
     font-size: 9px;
-    color: #B4B7C4;
+    color: #9A9482;
     text-align: center;
     line-height: 1.6;
   }
@@ -187,52 +198,78 @@
 
 <div class="card">
 
-  <div class="top">
+  <div class="masthead">
     <img src="https://i.ibb.co/r2qxfB4s/hs-Zr-Uw-Ea1knm-WZqe-ERXWt7-Wnvvrm2rly-Rx0jr-E8kq-Mak-Ef0-Vcel-Ji4t-QPrrxcd-Dm-X3o-Jo3q-TVj6508-p-Ne-n.jpg" alt="Stock Learners" class="profile-img">
-    <div class="top-text">
+    <div class="masthead-text">
       <h1>Stock Learners</h1>
-      <p>Learning community, built for growth</p>
+      <p>A community for market education</p>
     </div>
   </div>
 
-  <div class="badge-row">
-    <div class="badge"><span class="num">4</span><span class="lbl">Focus areas</span></div>
-    <div class="badge"><span class="num">100%</span><span class="lbl">Educational</span></div>
-    <div class="badge"><span class="num">Free</span><span class="lbl">To join</span></div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="up">NIFTY ▲</span>
+      <span>RSI</span>
+      <span class="down">VIX ▼</span>
+      <span>MACD</span>
+      <span class="up">SENSEX ▲</span>
+      <span>SUPPORT</span>
+      <span>RESISTANCE</span>
+      <span class="down">CRUDE ▼</span>
+      <span>NIFTY ▲</span>
+      <span>RSI</span>
+      <span class="down">VIX ▼</span>
+      <span>MACD</span>
+      <span class="up">SENSEX ▲</span>
+      <span>SUPPORT</span>
+      <span>RESISTANCE</span>
+      <span class="down">CRUDE ▼</span>
+    </div>
+  </div>
+
+  <div class="chart">
+    <svg viewBox="0 0 320 60" width="100%" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect x="14" y="30" width="6" height="18" fill="#3E6B4F"/>
+      <line x1="17" y1="24" x2="17" y2="52" stroke="#3E6B4F" stroke-width="1.5"/>
+      <rect x="30" y="18" width="6" height="14" fill="#A6432F"/>
+      <line x1="33" y1="12" x2="33" y2="36" stroke="#A6432F" stroke-width="1.5"/>
+      <rect x="46" y="24" width="6" height="20" fill="#3E6B4F"/>
+      <line x1="49" y1="18" x2="49" y2="48" stroke="#3E6B4F" stroke-width="1.5"/>
+      <rect x="62" y="10" width="6" height="16" fill="#3E6B4F"/>
+      <line x1="65" y1="4" x2="65" y2="30" stroke="#3E6B4F" stroke-width="1.5"/>
+      <rect x="78" y="20" width="6" height="12" fill="#A6432F"/>
+      <line x1="81" y1="14" x2="81" y2="36" stroke="#A6432F" stroke-width="1.5"/>
+      <rect x="94" y="8" width="6" height="18" fill="#3E6B4F"/>
+      <line x1="97" y1="2" x2="97" y2="30" stroke="#3E6B4F" stroke-width="1.5"/>
+      <path d="M14 40 L33 24 L49 34 L65 17 L81 26 L97 17" stroke="#B4802B" stroke-width="1" fill="none" opacity="0.5"/>
+      <line x1="0" y1="56" x2="320" y2="56" stroke="#D8CFB8" stroke-width="1"/>
+    </svg>
   </div>
 
   <div class="features">
     <div class="feature-item">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h11.5L20 5.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-      </div>
-      <span>Learning and educational sessions</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h11.5L20 5.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      <span>Structured learning and educational sessions</span>
     </div>
     <div class="feature-item">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a9 9 0 0 1 0 18M12 3a9 9 0 0 0 0 18"/></svg>
-      </div>
-      <span>Market concepts and awareness</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M12 3a9 9 0 0 0 0 18M3 12h18"/></svg>
+      <span>Market concepts and broader awareness</span>
     </div>
     <div class="feature-item">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
-      </div>
-      <span>Chart reading concepts</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+      <span>Chart reading concepts, explained simply</span>
     </div>
     <div class="feature-item">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
-      </div>
-      <span>Educational case discussions</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+      <span>Open discussion around educational case studies</span>
     </div>
   </div>
 
-  <p class="join-text">Join the community and grow your knowledge</p>
+  <p class="join-text">Join the community and grow your knowledge, one session at a time.</p>
 
   <a href="http://telegram.me/+niPbAnMtRtk3Njk9" class="telegram-btn">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15L18.1 6.8c.43-.38-.1-.6-.66-.22L7.1 13.1l-4.99-1.56c-1.08-.34-1.1-1.08.23-1.6L20.6 3.1c.9-.33 1.68.22 1.3 1.2Z"/></svg>
-    Join on Telegram
+      Join on Telegram
   </a>
 
   <p class="hindi-quote">नियत अच्छी और मेहनत सच्ची हो,<br>तो कामयाबी जरूर मिलती है।</p>
